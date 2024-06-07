@@ -52,9 +52,13 @@ def json_vers_nx(fichier): # O(N^4)
                     if (acteur1, acteur2) not in G and acteur1 != acteur2:
                         G.add_edge(acteur1, acteur2)
     # Dessiner et afficher le graphe
-    # nx.draw(G, with_labels=True)
-    # plt.show()
+    nx.draw(G, with_labels=True)
+    plt.show()
     return G 
+
+c = json_vers_nx("data_100.txt")
+d = json_vers_nx("data_1000.txt")
+e = json_vers_nx("data_10000.txt")
 
 # 6.2
 def collaborateurs_communs(acteur1, acteur2, G): # 0(N)
@@ -197,6 +201,8 @@ def centre_hollywood(G): # O(N^2)
             valmax = centr
             actmax = acteur
     return actmax, valmax
+
+print(centre_hollywood(json_vers_nx("data_100.txt")))
 
 # 6.5
 def eloignement_max(G): # O(N)
