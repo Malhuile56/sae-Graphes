@@ -78,6 +78,7 @@ def collaborateurs_communs(acteur1, acteur2, G): # 0(N)
             if (acteur1, acteur) in G.edges and (acteur2, acteur) in G.edges:
                 collab.add(acteur)
     return collab
+print(len(collaborateurs_communs("Al Pacino","Robert De Niro", "data_100.txt")))
 
 # 6.3
 def collaborateurs_proches(G, u, k): # O(N)
@@ -102,6 +103,8 @@ def collaborateurs_proches(G, u, k): # O(N)
         proches = proches.union(proches_directs)
     return proches
 
+print(collaborateurs_proches(c, "Al Pacino", 2))
+
 def est_proche(G, acteur1, acteur2, k): # 0(N)
     """Fonction qui permet de savoir si acteur2 se situe à k distance de acteur1.
 
@@ -119,6 +122,8 @@ def est_proche(G, acteur1, acteur2, k): # 0(N)
         return acteur2 in acteurs
     return None
 
+print(est_proche(c, "Al Pacino", "John Randolph", 1))
+
 def distance_naive(G, acteur1, acteur2): # O(N^3)
     """Permet de calculer la distance entre deux acteurs.
 
@@ -134,6 +139,7 @@ def distance_naive(G, acteur1, acteur2): # O(N^3)
     while not est_proche(G, acteur1, acteur2, dist) and dist < len(G.nodes):
         dist += 1
     return dist
+print(distance_naive(c, "Holly Hunter", "John Randolph"))
 
 def distance(G, acteur1, acteur2): # O(N^2)
     """Permet de calculer la distance entre deux acteurs.
@@ -154,6 +160,7 @@ def distance(G, acteur1, acteur2): # O(N^2)
     while not est_proche(G, acteur1, acteur2, dist) and dist < len(G.nodes):
         dist += 1
     return dist
+print(distance(c, 'Holly Hunter', 'John Randolph'))
 
 # 6.4
 def centralite(G, acteur): # O(N^2)
@@ -180,6 +187,7 @@ def centralite(G, acteur): # O(N^2)
                 liste_acteurs.append((voisin, distance + 1))
                 dist_max = distance + 1
     return dist_max
+print(centralite(c,"Al Pacino"))
 
 def centre_hollywood(G): # O(N^2)
     """Fonction renvoyant l'acteur avec la centralité la plus élevée.
@@ -202,7 +210,7 @@ def centre_hollywood(G): # O(N^2)
             actmax = acteur
     return actmax, valmax
 
-print(centre_hollywood(json_vers_nx("data_100.txt")))
+print(centre_hollywood(c))
 
 # 6.5
 def eloignement_max(G): # O(N)
@@ -253,3 +261,4 @@ def le_plus_eloigne(acteur, G): # O(N^2)
                 liste_acteurs.append((voisin, distance + 1))  # Mise dans la file pour les parcourir plus tard
         
     return plus_loin, dist_max  # Retourne l'acteur le plus loin et sa distance avec l'acteur passé en paramètre
+print(le_plus_eloigne(c))
